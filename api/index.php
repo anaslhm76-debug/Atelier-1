@@ -3,90 +3,138 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Portfolio</title>
+<title>Portfolio Pro</title>
 
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, #eef2ff, #f5f5f5);
-  text-align: center;
   margin: 0;
+  transition: 0.3s;
 }
 
-/* Title */
-h1 {
-  color: #1f2937;
-  margin-top: 30px;
+/* Light Mode */
+body.light {
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+  color: white;
+}
+
+/* Dark Mode */
+body.dark {
+  background: #0f172a;
+  color: white;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.2);
+}
+
+/* Profile */
+.profile {
+  text-align: center;
+  margin: 20px;
+}
+
+.profile h2 {
+  margin: 5px;
+}
+
+/* Skills */
+.skills {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.skill {
+  background: white;
+  color: #1e3a8a;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 14px;
 }
 
 /* Buttons */
-.buttons button {
-  background: #2563eb;
-  color: white;
+.buttons {
+  text-align: center;
+  margin: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 20px;
   border: none;
-  padding: 12px 25px;
-  margin: 10px;
-  border-radius: 10px;
   cursor: pointer;
-  font-size: 16px;
-  transition: 0.3s;
-}
-
-.buttons button:hover {
-  background: #3b82f6;
-  transform: scale(1.05);
-}
-
-/* Container */
-.container {
-  margin-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 /* Cards */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
 .card {
   background: white;
-  margin: 15px;
-  padding: 25px;
-  width: 220px;
+  color: #1f2937;
+  padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-  font-weight: 500;
-  transition: 0.3s;
+  text-align: center;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  transform: scale(1.05);
 }
 
-/* Icon */
 .icon {
   font-size: 30px;
-  margin-bottom: 10px;
 }
 
-/* Fade animation */
+/* Toggle */
+.toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+/* Animation */
 .fade {
-  animation: fadeIn 0.5s ease-in-out;
+  animation: fade 0.5s;
 }
 
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
+@keyframes fade {
+  from {opacity:0;}
+  to {opacity:1;}
 }
 </style>
 
 </head>
-<body>
 
-<h1>🎓 Mon Portfolio</h1>
+<body class="light">
+
+<button class="toggle" onclick="toggleMode()">🌙</button>
+
+<header>🎓 Mon Portfolio</header>
+
+<div class="profile">
+  <h2>Ton Nom</h2>
+  <p>Développeur Web | HTML CSS JS</p>
+</div>
+
+<div class="skills">
+  <div class="skill">HTML</div>
+  <div class="skill">CSS</div>
+  <div class="skill">JavaScript</div>
+</div>
 
 <div class="buttons">
   <button onclick="showAtelier(1)">Atelier 1</button>
@@ -101,38 +149,38 @@ function showAtelier(num) {
 
   if (num === 1) {
     content.innerHTML = `
-      <div class="card fade">
+      <div class="card fade" onclick="openFile('#')">
         <div class="icon">📘</div>
         Exercice 1
       </div>
-      <div class="card fade">
+      <div class="card fade" onclick="openFile('#')">
         <div class="icon">📄</div>
         Rapport 1
       </div>
-      <div class="card fade">
+      <div class="card fade" onclick="openFile('#')">
         <div class="icon">📘</div>
         Exercice 2
       </div>
-      <div class="card fade">
+      <div class="card fade" onclick="openFile('#')">
         <div class="icon">📄</div>
         Rapport 2
       </div>
     `;
   } else {
     content.innerHTML = `
-      <div class="card fade">
+      <div class="card fade" onclick="openFile('#')">
         <div class="icon">📘</div>
         Exercice 3
       </div>
-      <div class="card fade">
+      <div class="card fade" onclick="openFile('#')">
         <div class="icon">📄</div>
         Rapport 3
       </div>
-      <div class="card fade">
+      <div class="card fade" onclick="openFile('#')">
         <div class="icon">📘</div>
         Exercice 4
       </div>
-      <div class="card fade">
+      <div class="card fade" onclick="openFile('#')">
         <div class="icon">📄</div>
         Rapport 4
       </div>
@@ -140,7 +188,18 @@ function showAtelier(num) {
   }
 }
 
-/* Show Atelier 1 by default */
+/* Open file (PDF link later) */
+function openFile(link) {
+  alert("Hna t9dar t7et lien dyal PDF");
+}
+
+/* Dark Mode */
+function toggleMode() {
+  document.body.classList.toggle("dark");
+  document.body.classList.toggle("light");
+}
+
+/* Default */
 window.onload = () => showAtelier(1);
 </script>
 
