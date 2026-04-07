@@ -156,7 +156,7 @@ function showAtelier(num) {
         <a href="seance1_ex1.php" target="_blank">📘</a>
         Exercice 2
       </div>
-      <div class="card fade" onclick="openFile('#')">
+      <div class="card fade" onclick="openFile('rapport exercice 1.pdf')">
         <div class="icon">📄</div>
         Rapport 2
       </div>
