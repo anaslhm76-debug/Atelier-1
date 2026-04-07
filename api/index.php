@@ -1,143 +1,149 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ateliers PHP - Anas Dev Web</title>
+<meta charset="UTF-8">
+<title>Portfolio</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-        body {
-            background: #f4f6f9;
-            color: #333;
-        }
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #eef2ff, #f5f5f5);
+  text-align: center;
+  margin: 0;
+}
 
-        header {
-            background: #0d6efd;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+/* Title */
+h1 {
+  color: #1f2937;
+  margin-top: 30px;
+}
 
-        header h1 {
-            font-size: 2rem;
-        }
+/* Buttons */
+.buttons button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  margin: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 40px auto;
-        }
+.buttons button:hover {
+  background: #3b82f6;
+  transform: scale(1.05);
+}
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
+/* Container */
+.container {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: 0.3s;
-        }
+/* Cards */
+.card {
+  background: white;
+  margin: 15px;
+  padding: 25px;
+  width: 220px;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  font-weight: 500;
+  transition: 0.3s;
+  cursor: pointer;
+}
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
 
-        .card h3 {
-            margin-bottom: 10px;
-            color: #0d6efd;
-        }
+/* Icon */
+.icon {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
 
-        .card p {
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
+/* Fade animation */
+.fade {
+  animation: fadeIn 0.5s ease-in-out;
+}
 
-        .card a {
-            display: inline-block;
-            padding: 10px 15px;
-            background: #0d6efd;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 14px;
-        }
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+</style>
 
-        .card a:hover {
-            background: #084298;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            background: #222;
-            color: white;
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
 </head>
-
 <body>
 
-<header>
-    <h1>💻 Mes Ateliers PHP</h1>
-    <p>Par Anas Dev Web</p>
-</header>
+<h1>🎓 Mon Portfolio</h1>
 
-<div class="container">
-    <div class="grid">
-
-        <!-- Atelier 1 -->
-        <div class="card">
-            <h3>📌 Atelier 1 : Formulaire PHP</h3>
-            <p>Création d’un formulaire avec traitement des données en PHP.</p>
-            <a href="#">Voir projet</a>
-        </div>
-
-        <!-- Atelier 2 -->
-        <div class="card">
-            <h3>📌 Atelier 2 : Connexion MySQL</h3>
-            <p>Connexion à une base de données avec PDO et affichage des données.</p>
-            <a href="#">Voir projet</a>
-        </div>
-
-        <!-- Atelier 3 -->
-        <div class="card">
-            <h3>📌 Atelier 3 : CRUD</h3>
-            <p>Application complète CRUD (Créer, Lire, Modifier, Supprimer).</p>
-            <a href="#">Voir projet</a>
-        </div>
-
-        <!-- Atelier 4 -->
-        <div class="card">
-            <h3>📌 Atelier 4 : Authentification</h3>
-            <p>Système de login / logout avec sessions PHP.</p>
-            <a href="#">Voir projet</a>
-        </div>
-
-    </div>
+<div class="buttons">
+  <button onclick="showAtelier(1)">Atelier 1</button>
+  <button onclick="showAtelier(2)">Atelier 2</button>
 </div>
 
-<footer>
-    <p>© 2026 Anas Dev Web - Tous droits réservés</p>
-</footer>
+<div id="content" class="container"></div>
+
+<script>
+function showAtelier(num) {
+  let content = document.getElementById("content");
+
+  if (num === 1) {
+    content.innerHTML = `
+      <div class="card fade">
+        <div class="icon">📘</div>
+        Exercice 1
+      </div>
+      <div class="card fade">
+        <div class="icon">📄</div>
+        Rapport 1
+      </div>
+      <div class="card fade">
+        <div class="icon">📘</div>
+        Exercice 2
+      </div>
+      <div class="card fade">
+        <div class="icon">📄</div>
+        Rapport 2
+      </div>
+    `;
+  } else {
+    content.innerHTML = `
+      <div class="card fade">
+        <div class="icon">📘</div>
+        Exercice 3
+      </div>
+      <div class="card fade">
+        <div class="icon">📄</div>
+        Rapport 3
+      </div>
+      <div class="card fade">
+        <div class="icon">📘</div>
+        Exercice 4
+      </div>
+      <div class="card fade">
+        <div class="icon">📄</div>
+        Rapport 4
+      </div>
+    `;
+  }
+}
+
+/* Show Atelier 1 by default */
+window.onload = () => showAtelier(1);
+</script>
 
 </body>
 </html>
+```
