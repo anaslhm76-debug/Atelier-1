@@ -13,14 +13,35 @@ body{
   overflow-x:hidden;
 }
 
-/* NAV */
+/* NAVBAR PRO */
 nav{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px 40px;
+  padding:18px 40px;
   background:rgba(255,255,255,0.05);
   backdrop-filter:blur(15px);
+}
+
+.nav-center{
+  text-align:center;
+  flex:1;
+  animation:fadeDown 1s ease;
+}
+
+.nav-center h1{
+  margin:0;
+  font-size:26px;
+  letter-spacing:2px;
+  font-weight:600;
+  text-transform:uppercase;
+}
+
+.nav-center span{
+  font-size:12px;
+  opacity:0.7;
+  letter-spacing:3px;
+  text-transform:uppercase;
 }
 
 /* HEADER */
@@ -86,7 +107,6 @@ header{
   border-radius:15px;
 }
 
-/* INPUT */
 input{
   width:100%;
   padding:10px;
@@ -95,7 +115,6 @@ input{
   border-radius:8px;
 }
 
-/* BUTTON */
 button{
   padding:10px 15px;
   border:none;
@@ -112,12 +131,10 @@ button:hover{
   background:#0072ff;
 }
 
-/* RIPPLE */
-@keyframes ripple{
-  to{
-    transform:scale(20);
-    opacity:0;
-  }
+/* ANIMATION */
+@keyframes fadeDown{
+  from{opacity:0; transform:translateY(-30px);}
+  to{opacity:1; transform:translateY(0);}
 }
 </style>
 </head>
@@ -125,7 +142,14 @@ button:hover{
 <body>
 
 <nav>
-  <h1>Anass Lahmar</h1>
+  <div></div>
+
+  <div class="nav-center">
+    <h1>Anass Lahmar</h1>
+    <span>Portfolio Professionnel</span>
+  </div>
+
+  <div></div>
 </nav>
 
 <header>
