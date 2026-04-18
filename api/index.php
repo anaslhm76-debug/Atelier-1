@@ -27,17 +27,6 @@ nav{
   text-align:center;
 }
 
-/* PROFILE */
-.profile-img{
-  width:95px;
-  height:95px;
-  border-radius:50%;
-  object-fit:cover;
-  border:3px solid rgba(255,255,255,0.3);
-  margin-bottom:10px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.4);
-}
-
 .nav-center h1{
   margin:0;
   font-size:30px;
@@ -154,7 +143,6 @@ button:hover{
 
 <nav>
   <div class="nav-center">
-
     <h1>ANASS LAHMAR</h1>
     <span>Portfolio</span>
     <span>TPs et Rapports</span>
@@ -178,25 +166,32 @@ button:hover{
 
 <div id="exercices"></div>
 
+<!-- MODAL -->
 <div id="modal" onclick="outsideClick(event)">
   <div class="modal-content">
+
     <h3 id="title"></h3>
 
-    <label>Lien TP</label>
-    <input type="text" id="tpLink">
+    <!-- TP -->
+    <div>
+      <h4>🔵 TP</h4>
+      <input type="text" id="tpLink" placeholder="Lien TP">
+      <button onclick="openLink('tp')">Ouvrir TP</button>
+    </div>
 
-    <button onclick="openLink('tp')">🔗 Ouvrir TP</button>
+    <!-- RAPPORT -->
+    <div style="margin-top:15px;">
+      <h4>🟢 Rapport</h4>
+      <input type="text" id="rapportLink" placeholder="Lien Rapport">
+      <button onclick="openLink('rapport')">Ouvrir Rapport</button>
+    </div>
 
-    <label>Lien Rapport</label>
-    <input type="text" id="rapportLink">
-
-    <button onclick="openLink('rapport')">🔗 Ouvrir Rapport</button>
-
-    <br><br>
+    <br>
 
     <button onclick="saveData()">💾 Sauvegarder</button>
     <button onclick="deleteData()">🗑 Supprimer</button>
     <button onclick="closeModal()">Fermer</button>
+
   </div>
 </div>
 
