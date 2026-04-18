@@ -155,9 +155,6 @@ button:hover{
 <nav>
   <div class="nav-center">
 
-    <!-- PROFILE IMAGE (HNA LBLASSA DIAL TSWIRA) -->
-    <img class="profile-img" src="api/WhatsApp Image 2026-04-18 at 12.52.28.jpg" alt="profil">
-
     <h1>ANASS LAHMAR</h1>
     <span>Portfolio</span>
     <span>TPs et Rapports</span>
