@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Portfolio - Nito</title>
+<title>Portfolio - ANASS LAHMAR</title>
 
 <style>
 body{
@@ -143,7 +143,7 @@ button:hover{
 
 <nav>
   <div class="nav-center">
-    <h1>Nito</h1>
+    <h1>ANASS LAHMAR</h1>
     <span>Mon Portfolio</span>
     <span>TPs et Rapports</span>
   </div>
@@ -206,7 +206,6 @@ const data = {
 
 let currentKey="";
 
-/* OPEN */
 function openAtelier(name){
 let box=document.getElementById("exercices");
 box.innerHTML="<h3>"+name+"</h3>";
@@ -231,7 +230,6 @@ document.getElementById("tpLink").value=localStorage.getItem(currentKey+"_tp")||
 document.getElementById("rapportLink").value=localStorage.getItem(currentKey+"_rapport")||"";
 }
 
-/* STORAGE */
 function saveData(){
 localStorage.setItem(currentKey+"_tp",document.getElementById("tpLink").value);
 localStorage.setItem(currentKey+"_rapport",document.getElementById("rapportLink").value);
@@ -245,7 +243,6 @@ document.getElementById("tpLink").value="";
 document.getElementById("rapportLink").value="";
 }
 
-/* MODAL */
 function openLink(type){
 let link=localStorage.getItem(currentKey+"_"+type);
 if(link) window.open(link,"_blank");
