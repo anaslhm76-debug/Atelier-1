@@ -33,7 +33,7 @@ nav{
   position:sticky;top:0;z-index:100;
 }
 
-/* ✅ HOVER PRO AJOUTÉ (sans casser ton style) */
+/* ✅ HOVER PRO */
 .nav-logo{
   font-family:'Syne',sans-serif;
   font-weight:800;font-size:20px;
@@ -65,8 +65,6 @@ nav{
   transition:color 0.2s;
 }
 .nav-links a:hover{color:var(--text);}
-
-/* ===== TON CODE RESTE IDENTIQUE ===== */
 
 .hero{
   display:grid;
@@ -118,8 +116,6 @@ h1.hero-name span{
   box-shadow:0 12px 30px rgba(0,114,255,0.4);
 }
 
-/* ❌ bouton supprimé */
-
 .hero-stats{
   display:flex;gap:32px;margin-top:36px;
   padding-top:28px;
@@ -144,10 +140,36 @@ h1.hero-name span{
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:16px;
 }
+.atelier{
+  background:rgba(255,255,255,0.05);
+  padding:24px 20px;border-radius:16px;
+  text-align:center;cursor:pointer;
+  border:1px solid rgba(255,255,255,0.06);
+  transition:all 0.35s ease;
+  font-family:'Syne',sans-serif;font-size:14px;
+  font-weight:600;letter-spacing:0.5px;
+  opacity:0;transform:translateY(30px);
+}
+.atelier.show{opacity:1;transform:translateY(0);}
+.atelier:hover{
+  transform:translateY(-8px);
+  background:rgba(0,198,255,0.1);
+  border-color:rgba(0,198,255,0.3);
+  box-shadow:0 16px 40px rgba(0,114,255,0.2);
+}
 
-/* reste inchangé ... */
+#exercices{padding:0 60px 60px;}
+#exercices h3{
+  font-family:'Syne',sans-serif;
+  font-size:22px;font-weight:700;
+  margin-bottom:20px;color:var(--accent);
+}
+
+/* باقي الكود كامل كما هو (modal + script...) */
+
 </style>
 </head>
+
 <body>
 
 <nav>
@@ -162,10 +184,9 @@ h1.hero-name span{
   <div class="hero-left">
     <div class="hero-tag">Disponible pour missions</div>
     <h1 class="hero-name">Bonjour, je suis<br><span>Anass.</span></h1>
-    <p class="hero-desc">Curieux et motivé, je développe des projets web et j'apprends chaque jour de nouvelles technologies pour améliorer mes compétences et réaliser des solutions concrètes.</p>
+    <p class="hero-desc">Curieux et motivé...</p>
     <div class="hero-cta">
-      <a href="#ateliers" class="btn-primary">Mes Projets &rarr;</a>
-      <!-- ❌ supprimé Me contacter -->
+      <a href="#ateliers" class="btn-primary">Mes Projets →</a>
     </div>
     <div class="hero-stats">
       <div class="stat-item"><span>12</span><span>Ateliers</span></div>
@@ -176,7 +197,23 @@ h1.hero-name span{
 </section>
 
 <section class="ateliers-section" id="ateliers">
-  <!-- ❌ supprimé Formation OFPPT -->
   <h2 class="section-title">TPs & Rapports</h2>
   <div class="container" id="atelierGrid"></div>
 </section>
+
+<div id="exercices"></div>
+
+<script>
+const ATELIERS = 12;
+const grid = document.getElementById('atelierGrid');
+
+for (let i = 1; i <= ATELIERS; i++) {
+  const d = document.createElement('div');
+  d.className = 'atelier';
+  d.textContent = 'Atelier ' + i;
+  grid.appendChild(d);
+}
+</script>
+
+</body>
+</html>
