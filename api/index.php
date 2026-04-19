@@ -64,14 +64,12 @@ nav.scrolled{
   font-weight:800;font-size:20px;
   letter-spacing:2px;text-transform:uppercase;
   cursor:pointer;display:inline-block;position:relative;padding-bottom:4px;
+  background:linear-gradient(90deg,#fff 0%,var(--accent) 50%,#fff 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  transition:background-position 0.5s ease;
 }
-.nav-logo::after{
-  content:'';position:absolute;bottom:0;left:0;
-  width:0;height:2px;
-  background:linear-gradient(90deg,var(--accent3),var(--accent));
-  border-radius:2px;transition:width 0.4s cubic-bezier(.22,1,.36,1);
-}
-.nav-logo:hover::after{width:100%;}
+.nav-logo:hover{background-position:right center;}
 
 .nav-links{display:flex;gap:32px;list-style:none;}
 .nav-links a{
@@ -104,10 +102,17 @@ nav.scrolled{
   margin-bottom:28px;
   opacity:0;transform:translateY(20px);
   animation:fadeUp 0.6s 0.1s ease forwards;
+  transition:background 0.3s, border-color 0.3s, transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s;
 }
 .hero-tag::before{
   content:'';width:6px;height:6px;border-radius:50%;
   background:var(--accent);animation:pulse 2s infinite;
+}
+.hero-tag:hover{
+  background:rgba(0,198,255,0.14);
+  border-color:rgba(0,198,255,0.4);
+  transform:translateX(4px);
+  box-shadow:0 0 20px rgba(0,198,255,0.12);
 }
 
 .hero-name{
@@ -197,14 +202,34 @@ nav.scrolled{
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .stat-item span:last-child{font-size:11px;color:var(--muted);letter-spacing:0.5px;}
+.stat-item{
+  position:relative;padding:10px 14px;border-radius:12px;
+  transition:background 0.3s ease, transform 0.3s cubic-bezier(.22,1,.36,1);cursor:default;
+}
+.stat-item::before{
+  content:'';position:absolute;inset:0;border-radius:12px;
+  border:1px solid transparent;transition:border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.stat-item:hover{background:rgba(0,198,255,0.05);transform:translateY(-4px);}
+.stat-item:hover::before{border-color:rgba(0,198,255,0.18);box-shadow:0 8px 24px rgba(0,198,255,0.08);}
 
 .ateliers-section{padding:80px 60px;position:relative;z-index:1;}
 .section-title{
   font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,38px);font-weight:700;
   text-align:center;margin-bottom:40px;
-  opacity:0;transform:translateY(30px);transition:opacity 0.7s ease, transform 0.7s ease;
+  opacity:0;
+  position:relative;display:inline-block;left:50%;transform:translateX(-50%) translateY(30px);
+  transition:opacity 0.7s ease, transform 0.7s ease;
 }
-.section-title.in-view{opacity:1;transform:translateY(0);}
+.section-title.in-view{opacity:1;transform:translateX(-50%) translateY(0);}
+.section-title::after{
+  content:'';position:absolute;bottom:-8px;left:50%;
+  width:0;height:2px;
+  background:linear-gradient(90deg,var(--accent3),var(--accent),var(--accent2));
+  border-radius:2px;transform:translateX(-50%);
+  transition:width 0.6s 0.4s cubic-bezier(.22,1,.36,1);
+}
+.section-title.in-view::after{width:60px;}
 
 .container{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;}
 
@@ -245,20 +270,43 @@ nav.scrolled{
   border:1px solid rgba(255,255,255,0.05);
   opacity:0;transform:translateX(-20px);transition:opacity 0.4s, transform 0.4s, background 0.2s, border-color 0.2s;
   display:flex;align-items:center;justify-content:space-between;gap:16px;
+  position:relative;overflow:hidden;
 }
+.exercice-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:3px;background:linear-gradient(180deg,var(--accent3),var(--accent));
+  border-radius:3px 0 0 3px;
+  transform:scaleY(0);transform-origin:bottom;
+  transition:transform 0.35s cubic-bezier(.22,1,.36,1);
+}
+.exercice-card:hover::before{transform:scaleY(1);}
 .exercice-card.show{opacity:1;transform:translateX(0);}
-.exercice-card:hover{background:rgba(255,255,255,0.06);border-color:rgba(0,198,255,0.15);}
+.exercice-card:hover{
+  background:rgba(0,198,255,0.05) !important;
+  border-color:rgba(0,198,255,0.2) !important;
+  transform:translateX(6px);
+  box-shadow:0 4px 24px rgba(0,0,0,0.2);
+}
 .exercice-label{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;flex:1;}
 .exercice-label::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;animation:pulse 2.5s infinite;}
 .exercice-links{display:flex;gap:8px;flex-shrink:0;}
 .link-btn{
   display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:20px;
   font-size:12px;font-weight:500;text-decoration:none;border:1px solid;transition:all 0.2s;cursor:pointer;
+  position:relative;overflow:hidden;
 }
+.link-btn::after{
+  content:'';position:absolute;inset:0;
+  background:rgba(255,255,255,0.06);
+  transform:translateX(-100%);
+  transition:transform 0.3s ease;
+  border-radius:inherit;
+}
+.link-btn:hover::after{transform:translateX(0);}
 .link-tp{color:var(--accent);border-color:rgba(0,198,255,0.3);background:rgba(0,198,255,0.07);}
-.link-tp:hover{background:rgba(0,198,255,0.18);border-color:rgba(0,198,255,0.6);}
+.link-tp:hover{background:rgba(0,198,255,0.18);border-color:rgba(0,198,255,0.6);transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,198,255,0.2);}
 .link-rapport{color:#a78bfa;border-color:rgba(167,139,250,0.3);background:rgba(167,139,250,0.07);}
-.link-rapport:hover{background:rgba(167,139,250,0.18);border-color:rgba(167,139,250,0.6);}
+.link-rapport:hover{background:rgba(167,139,250,0.18);border-color:rgba(167,139,250,0.6);transform:translateY(-2px);box-shadow:0 4px 14px rgba(167,139,250,0.2);}
 .link-btn svg{width:11px;height:11px;flex-shrink:0;}
 
 #contactModal{
@@ -292,7 +340,8 @@ nav.scrolled{
 }
 .cinfo-tile:hover{background:rgba(0,198,255,0.08);border-color:rgba(0,198,255,0.25);transform:translateY(-3px);}
 .cinfo-tile.full{grid-column:1/-1;}
-.cinfo-icon{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:rgba(0,198,255,0.1);border:1px solid rgba(0,198,255,0.18);display:flex;align-items:center;justify-content:center;}
+.cinfo-icon{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:rgba(0,198,255,0.1);border:1px solid rgba(0,198,255,0.18);display:flex;align-items:center;justify-content:center;transition:transform 0.3s ease;}
+.cinfo-tile:hover .cinfo-icon{transform:scale(1.15) rotate(-5deg);transition:transform 0.3s cubic-bezier(.34,1.56,.64,1);}
 .cinfo-icon svg{width:16px;height:16px;color:var(--accent);}
 .cinfo-label{font-size:11px;color:var(--muted);letter-spacing:0.4px;display:block;margin-bottom:2px;}
 .cinfo-value{font-size:13px;font-weight:500;}
@@ -311,9 +360,9 @@ nav.scrolled{
 input{
   flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
   border-radius:10px;padding:10px 14px;color:#fff;font-size:13px;font-family:'Inter',sans-serif;
-  outline:none;transition:border-color 0.2s;cursor:text;
+  outline:none;transition:border-color 0.2s, box-shadow 0.2s;cursor:text;
 }
-input:focus{border-color:var(--accent);}
+input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,198,255,0.12);}
 input::placeholder{color:rgba(255,255,255,0.25);}
 .btn-small{padding:10px 14px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:10px;color:#fff;font-size:12px;cursor:pointer;white-space:nowrap;transition:opacity 0.2s;font-family:'Inter',sans-serif;}
 .btn-small:hover{opacity:0.85;}
@@ -323,126 +372,13 @@ input::placeholder{color:rgba(255,255,255,0.25);}
 .btn-del{padding:11px 16px;background:rgba(255,80,80,0.1);border:1px solid rgba(255,80,80,0.18);border-radius:10px;color:#ff6060;font-size:13px;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;}
 .btn-del:hover{background:rgba(255,80,80,0.2);}
 .btn-close{padding:11px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;color:var(--muted);font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;}
+.btn-close:hover{background:rgba(255,255,255,0.1);color:var(--text);}
 
-/* ── SCROLL REVEAL BASE ── */
-.reveal{
-  opacity:0;
-  transform:translateY(40px);
-  transition:opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1);
-}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1);}
 .reveal.reveal-left{transform:translateX(-40px);}
 .reveal.reveal-right{transform:translateX(40px);}
 .reveal.reveal-scale{transform:translateY(20px) scale(0.95);}
 .reveal.in-view{opacity:1;transform:none;}
-
-/* ── STAT ITEMS hover ── */
-.stat-item{
-  position:relative;
-  padding:10px 14px;
-  border-radius:12px;
-  transition:background 0.3s ease, transform 0.3s cubic-bezier(.22,1,.36,1);
-  cursor:default;
-}
-.stat-item::before{
-  content:'';position:absolute;inset:0;border-radius:12px;
-  border:1px solid transparent;
-  transition:border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.stat-item:hover{
-  background:rgba(0,198,255,0.05);
-  transform:translateY(-4px);
-}
-.stat-item:hover::before{
-  border-color:rgba(0,198,255,0.18);
-  box-shadow:0 8px 24px rgba(0,198,255,0.08);
-}
-
-/* ── HERO TAG hover ── */
-.hero-tag{
-  transition:background 0.3s, border-color 0.3s, transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s;
-}
-.hero-tag:hover{
-  background:rgba(0,198,255,0.14);
-  border-color:rgba(0,198,255,0.4);
-  transform:translateX(4px);
-  box-shadow:0 0 20px rgba(0,198,255,0.12);
-}
-
-/* ── SECTION TITLE — underline sweep on scroll ── */
-.section-title{position:relative;display:inline-block;left:50%;transform:translateX(-50%) translateY(30px);}
-.section-title.in-view{transform:translateX(-50%) translateY(0);}
-.section-title::after{
-  content:'';position:absolute;bottom:-8px;left:50%;
-  width:0;height:2px;
-  background:linear-gradient(90deg,var(--accent3),var(--accent),var(--accent2));
-  border-radius:2px;transform:translateX(-50%);
-  transition:width 0.6s 0.4s cubic-bezier(.22,1,.36,1);
-}
-.section-title.in-view::after{width:60px;}
-
-/* ── EXERCICE CARD hover enhanced ── */
-.exercice-card{
-  position:relative;overflow:hidden;
-}
-.exercice-card::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;
-  width:3px;background:linear-gradient(180deg,var(--accent3),var(--accent));
-  border-radius:3px 0 0 3px;
-  transform:scaleY(0);transform-origin:bottom;
-  transition:transform 0.35s cubic-bezier(.22,1,.36,1);
-}
-.exercice-card:hover::before{transform:scaleY(1);}
-.exercice-card:hover{
-  background:rgba(0,198,255,0.05) !important;
-  border-color:rgba(0,198,255,0.2) !important;
-  transform:translateX(6px);
-  box-shadow:0 4px 24px rgba(0,0,0,0.2);
-}
-
-/* ── LINK BUTTONS hover ── */
-.link-btn{
-  position:relative;overflow:hidden;
-}
-.link-btn::after{
-  content:'';position:absolute;inset:0;
-  background:rgba(255,255,255,0.06);
-  transform:translateX(-100%);
-  transition:transform 0.3s ease;
-  border-radius:inherit;
-}
-.link-btn:hover::after{transform:translateX(0);}
-.link-tp:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,198,255,0.2);}
-.link-rapport:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(167,139,250,0.2);}
-
-/* ── NAV LOGO shimmer ── */
-.nav-logo{
-  background:linear-gradient(90deg,#fff 0%,var(--accent) 50%,#fff 100%);
-  background-size:200% auto;
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  transition:background-position 0.5s ease;
-}
-.nav-logo:hover{background-position:right center;}
-
-/* ── SCROLL TOP button ── */
-#scrollTop{
-  transition:opacity 0.3s, transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s;
-}
-
-/* ── CINFO TILE icon bounce ── */
-.cinfo-tile:hover .cinfo-icon{
-  transform:scale(1.15) rotate(-5deg);
-  transition:transform 0.3s cubic-bezier(.34,1.56,.64,1);
-}
-.cinfo-icon{transition:transform 0.3s ease;}
-
-/* ── INPUT focus glow ── */
-input:focus{
-  border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(0,198,255,0.12);
-}
-
-/* ── BTN CLOSE hover ── */
-.btn-close:hover{background:rgba(255,255,255,0.1);color:var(--text);}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
@@ -453,14 +389,13 @@ input:focus{
   background:linear-gradient(135deg,var(--accent3),var(--accent),var(--accent2));
   border:none;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;
   cursor:pointer;z-index:200;opacity:0;transform:translateY(20px);
-  transition:opacity 0.3s, transform 0.3s;box-shadow:0 4px 24px rgba(0,114,255,0.4);
+  transition:opacity 0.3s, transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s;
+  box-shadow:0 4px 24px rgba(0,114,255,0.4);
 }
 #scrollTop.visible{opacity:1;transform:translateY(0);}
 #scrollTop:hover{transform:translateY(-4px) scale(1.1);box-shadow:0 8px 32px rgba(123,47,255,0.5);}
 
 @media(max-width:768px){
-  body{cursor:auto;}
-  #cursor,#cursorRing{display:none;}
   nav{padding:16px 20px;}
   nav.scrolled{padding:12px 20px;}
   .hero{grid-template-columns:1fr;padding:40px 20px;text-align:center;min-height:auto;}
@@ -554,253 +489,270 @@ input:focus{
 
 <script>
 /* ══════════════════════════════════════════════════════════════════
-   3D DEEP SPACE — NEBULA + STAR CLUSTERS + WARP LINES + PARALLAX
+   WORMHOLE / NEBULA BACKGROUND — inspired by reference image
+   - Central glowing orb (black hole / wormhole effect)
+   - Concentric animated rings with glow
+   - Particle field / starfield
+   - Scroll-reactive parallax
+   - Cursor interaction
 ══════════════════════════════════════════════════════════════════ */
 (function() {
   const canvas = document.getElementById('bgCanvas');
   const ctx = canvas.getContext('2d');
 
-  let W, H;
-  const mouse = { x: -9999, y: -9999, vx: 0, vy: 0, px: -9999, py: -9999 };
+  let W, H, cx, cy;
   let scrollY = 0, targetScrollY = 0;
   let time = 0;
+  const mouse = { x: -9999, y: -9999 };
 
   function resize() {
     W = canvas.width = window.innerWidth;
     H = canvas.height = window.innerHeight;
+    cx = W * 0.72; // wormhole on the right side like reference
+    cy = H * 0.38;
   }
   resize();
   window.addEventListener('resize', resize);
 
   document.addEventListener('mousemove', e => {
-    mouse.vx = e.clientX - mouse.px;
-    mouse.vy = e.clientY - mouse.py;
-    mouse.px = mouse.x;
-    mouse.py = mouse.y;
     mouse.x = e.clientX;
     mouse.y = e.clientY;
   });
   document.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
   window.addEventListener('scroll', () => { targetScrollY = window.scrollY; });
 
-  /* ── STAR LAYERS (3 depth layers) ── */
-  const LAYERS = [
-    { count: 180, speed: 0.06, rMin: 0.3, rMax: 0.8,  alpha: 0.4, color: '220,235,255' },
-    { count: 90,  speed: 0.14, rMin: 0.6, rMax: 1.4,  alpha: 0.65, color: '180,220,255' },
-    { count: 40,  speed: 0.28, rMin: 1.0, rMax: 2.2,  alpha: 0.85, color: '140,200,255' },
-  ];
-
+  /* ── STARS ── */
+  const STAR_COUNT = 260;
   const stars = [];
-  LAYERS.forEach((layer, li) => {
-    for (let i = 0; i < layer.count; i++) {
-      stars.push({
-        ox: Math.random() * W,
-        oy: Math.random() * H,
-        r: layer.rMin + Math.random() * (layer.rMax - layer.rMin),
-        alpha: layer.alpha * (0.6 + Math.random() * 0.4),
-        twinkleOffset: Math.random() * Math.PI * 2,
-        twinkleSpeed: 0.01 + Math.random() * 0.02,
-        layer: li,
-        speed: layer.speed,
-        color: layer.color,
-        mx: 0, my: 0,
-      });
-    }
-  });
-
-  /* ── WARP / STREAK STARS ── */
-  const WARPS = [];
-  const WARP_COUNT = 22;
-  for (let i = 0; i < WARP_COUNT; i++) {
-    WARPS.push(newWarp());
-  }
-  function newWarp(reset) {
-    const angle = Math.random() * Math.PI * 2;
-    const cx2 = W * 0.5, cy2 = H * 0.5;
-    const dist = reset ? 0 : Math.random() * Math.max(W, H) * 0.45;
-    return {
-      x: cx2 + Math.cos(angle) * dist,
-      y: cy2 + Math.sin(angle) * dist,
-      angle,
-      speed: 0.4 + Math.random() * 1.2,
-      len: 20 + Math.random() * 80,
-      alpha: 0.15 + Math.random() * 0.3,
-      color: Math.random() > 0.5 ? '0,198,255' : '120,80,255',
-    };
+  for (let i = 0; i < STAR_COUNT; i++) {
+    stars.push({
+      x: Math.random() * 2000 - 500,
+      y: Math.random() * 2000 - 500,
+      r: 0.3 + Math.random() * 1.4,
+      alpha: 0.2 + Math.random() * 0.7,
+      twinkle: Math.random() * Math.PI * 2,
+      twinkleSpeed: 0.008 + Math.random() * 0.018,
+      depth: 0.05 + Math.random() * 0.25, // parallax depth
+    });
   }
 
-  function updateWarp(w) {
-    w.x += Math.cos(w.angle) * w.speed;
-    w.y += Math.sin(w.angle) * w.speed;
-    const cx2 = W * 0.5, cy2 = H * 0.5;
-    if (w.x < -100 || w.x > W + 100 || w.y < -100 || w.y > H + 100) {
-      Object.assign(w, newWarp(true));
-      w.x = cx2 + (Math.random() - 0.5) * W * 0.2;
-      w.y = cy2 + (Math.random() - 0.5) * H * 0.2;
-    }
-  }
-
-  function drawWarp(w) {
-    const tx = w.x - Math.cos(w.angle) * w.len;
-    const ty = w.y - Math.sin(w.angle) * w.len;
-    const grad = ctx.createLinearGradient(tx, ty, w.x, w.y);
-    grad.addColorStop(0, `rgba(${w.color},0)`);
-    grad.addColorStop(1, `rgba(${w.color},${w.alpha})`);
-    ctx.beginPath();
-    ctx.moveTo(tx, ty);
-    ctx.lineTo(w.x, w.y);
-    ctx.strokeStyle = grad;
-    ctx.lineWidth = 0.8;
-    ctx.stroke();
-  }
-
-  /* ── NEBULA CLOUDS (large soft blobs) ── */
-  const NEBULAS = [
-    { nx: 0.15, ny: 0.25, rx: 320, ry: 220, depth: 0.04, r: '0,50,120',  a: 0.07, rotate: 0.0003 },
-    { nx: 0.75, ny: 0.55, rx: 280, ry: 360, depth: 0.09, r: '60,0,130',  a: 0.06, rotate:-0.0002 },
-    { nx: 0.50, ny: 0.90, rx: 400, ry: 250, depth: 0.16, r: '0,80,160',  a: 0.05, rotate: 0.0001 },
-    { nx: 0.88, ny: 0.12, rx: 200, ry: 200, depth: 0.06, r: '80,0,160',  a: 0.05, rotate: 0.0002 },
-    { nx: 0.05, ny: 0.78, rx: 240, ry: 180, depth: 0.12, r: '0,100,200', a: 0.04, rotate:-0.0003 },
+  /* ── RINGS CONFIG ── */
+  // Each ring: radius, thickness, opacity, rotation speed, color stops
+  const RINGS = [
+    { r: 38,  w: 8,  a: 0.9,  speed:  0.012, color: '#c084fc' },
+    { r: 65,  w: 5,  a: 0.7,  speed: -0.009, color: '#a855f7' },
+    { r: 100, w: 4,  a: 0.55, speed:  0.007, color: '#818cf8' },
+    { r: 145, w: 3,  a: 0.40, speed: -0.006, color: '#60a5fa' },
+    { r: 200, w: 2,  a: 0.28, speed:  0.005, color: '#38bdf8' },
+    { r: 265, w: 2,  a: 0.18, speed: -0.004, color: '#7c3aed' },
+    { r: 340, w: 1.5,a: 0.12, speed:  0.003, color: '#6366f1' },
+    { r: 420, w: 1,  a: 0.08, speed: -0.002, color: '#818cf8' },
   ];
-  let nebulaAngles = NEBULAS.map(() => 0);
+  const ringAngles = RINGS.map(() => Math.random() * Math.PI * 2);
 
-  function drawNebulas() {
-    NEBULAS.forEach((n, i) => {
-      nebulaAngles[i] += n.rotate;
-      const px = n.nx * W;
-      const py = n.ny * H - scrollY * n.depth;
+  /* ── PARTICLE ORBITS (debris around wormhole) ── */
+  const PARTICLES = [];
+  for (let i = 0; i < 55; i++) {
+    const ring = RINGS[Math.floor(Math.random() * (RINGS.length - 2))];
+    PARTICLES.push({
+      angle: Math.random() * Math.PI * 2,
+      orbitR: ring.r * (0.9 + Math.random() * 0.2) + Math.random() * 30,
+      speed: (0.004 + Math.random() * 0.012) * (Math.random() > 0.5 ? 1 : -1),
+      r: 0.8 + Math.random() * 1.8,
+      alpha: 0.4 + Math.random() * 0.5,
+      color: Math.random() > 0.5 ? '160,100,255' : '100,180,255',
+    });
+  }
+
+  /* ── DRAW WORMHOLE CORE ── */
+  function drawCore(x, y) {
+    // Deep black hole center
+    const coreG = ctx.createRadialGradient(x, y, 0, x, y, 30);
+    coreG.addColorStop(0,   'rgba(0,0,0,1)');
+    coreG.addColorStop(0.6, 'rgba(5,0,20,0.95)');
+    coreG.addColorStop(1,   'rgba(30,0,60,0)');
+    ctx.fillStyle = coreG;
+    ctx.beginPath();
+    ctx.arc(x, y, 30, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Hot inner glow — purple/blue
+    const innerG = ctx.createRadialGradient(x, y, 0, x, y, 55);
+    innerG.addColorStop(0,   'rgba(200,120,255,0.7)');
+    innerG.addColorStop(0.3, 'rgba(140,60,255,0.35)');
+    innerG.addColorStop(0.7, 'rgba(80,40,200,0.12)');
+    innerG.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = innerG;
+    ctx.beginPath();
+    ctx.arc(x, y, 55, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Outer halo — wide diffuse glow
+    const outerG = ctx.createRadialGradient(x, y, 30, x, y, 280);
+    outerG.addColorStop(0,   'rgba(120,50,255,0.18)');
+    outerG.addColorStop(0.3, 'rgba(80,20,180,0.10)');
+    outerG.addColorStop(0.7, 'rgba(40,10,120,0.04)');
+    outerG.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = outerG;
+    ctx.beginPath();
+    ctx.arc(x, y, 280, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Thin bright ring at core edge
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(x, y, 33, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(220,150,255,0.6)';
+    ctx.lineWidth = 2;
+    ctx.shadowColor = 'rgba(200,100,255,0.9)';
+    ctx.shadowBlur = 16;
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  /* ── DRAW RINGS ── */
+  function drawRings(x, y) {
+    RINGS.forEach((ring, i) => {
+      ringAngles[i] += ring.speed;
       ctx.save();
-      ctx.translate(px, py);
-      ctx.rotate(nebulaAngles[i]);
+      ctx.translate(x, y);
+      ctx.rotate(ringAngles[i]);
 
-      // Pulsing size
-      const pulse = 1 + Math.sin(time * 0.0008 + i) * 0.04;
-      const g = ctx.createRadialGradient(0, 0, 0, 0, 0, Math.max(n.rx, n.ry) * pulse);
-      g.addColorStop(0,   `rgba(${n.r},${n.a})`);
-      g.addColorStop(0.4, `rgba(${n.r},${n.a * 0.5})`);
-      g.addColorStop(1,   `rgba(${n.r},0)`);
+      // Ellipse (perspective tilt) — rings tilt slightly
+      ctx.scale(1, 0.28 + i * 0.04);
 
-      ctx.scale(n.rx / n.ry, 1);
-      ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(0, 0, n.ry * pulse, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.arc(0, 0, ring.r, 0, Math.PI * 2);
+
+      const hex = ring.color;
+      ctx.strokeStyle = hex + Math.round(ring.a * 255).toString(16).padStart(2,'0');
+      ctx.lineWidth = ring.w;
+      ctx.shadowColor = ring.color;
+      ctx.shadowBlur = ring.w * 4;
+      ctx.stroke();
+
       ctx.restore();
     });
   }
 
-  /* ── CURSOR AURORA ── */
-  function drawAurora() {
+  /* ── DRAW PARTICLES ── */
+  function drawParticles(x, y) {
+    PARTICLES.forEach(p => {
+      p.angle += p.speed;
+      const px = x + Math.cos(p.angle) * p.orbitR;
+      // Y compressed for perspective
+      const py = y + Math.sin(p.angle) * p.orbitR * 0.32;
+
+      // Fade based on Y position (behind = faded)
+      const behind = Math.sin(p.angle) < 0;
+      const alpha = behind ? p.alpha * 0.3 : p.alpha;
+
+      ctx.beginPath();
+      ctx.arc(px, py, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.color},${alpha})`;
+      ctx.shadowColor = `rgba(${p.color},0.8)`;
+      ctx.shadowBlur = 6;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    });
+  }
+
+  /* ── DRAW STARS ── */
+  function drawStars() {
+    const scrollOffset = scrollY;
+    stars.forEach(s => {
+      const sx = ((s.x + W * 2) % (W + 500)) - 250;
+      const sy = ((s.y + H * 2 - scrollOffset * s.depth) % (H + 500)) - 250;
+      const tw = 0.6 + Math.sin(time * s.twinkleSpeed + s.twinkle) * 0.4;
+      ctx.beginPath();
+      ctx.arc(sx, sy, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200,220,255,${s.alpha * tw})`;
+      ctx.fill();
+    });
+  }
+
+  /* ── WIDE NEBULA BACKGROUND ── */
+  function drawNebula(x, y) {
+    // Wide purple fog top
+    const topG = ctx.createRadialGradient(x, -H * 0.1, 0, x, -H * 0.1, H * 1.1);
+    topG.addColorStop(0,   'rgba(80,20,160,0.22)');
+    topG.addColorStop(0.4, 'rgba(50,10,120,0.10)');
+    topG.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = topG;
+    ctx.fillRect(0, 0, W, H);
+
+    // Side ambient
+    const sideG = ctx.createRadialGradient(W * 0.85, H * 0.5, 0, W * 0.85, H * 0.5, W * 0.6);
+    sideG.addColorStop(0,   'rgba(60,10,140,0.14)');
+    sideG.addColorStop(0.5, 'rgba(30,5,80,0.07)');
+    sideG.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = sideG;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  /* ── CURSOR GLOW ── */
+  function drawCursorAura() {
     if (mouse.x < 0) return;
-    const speed = Math.sqrt(mouse.vx * mouse.vx + mouse.vy * mouse.vy);
-    const intensity = Math.min(speed * 0.04, 1);
-
-    // Inner hot core
-    const g1 = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 60);
-    g1.addColorStop(0,   `rgba(0,198,255,${0.08 + intensity * 0.06})`);
-    g1.addColorStop(0.5, `rgba(0,114,255,${0.03 + intensity * 0.03})`);
-    g1.addColorStop(1,   'rgba(0,50,200,0)');
-    ctx.fillStyle = g1;
+    const g = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 120);
+    g.addColorStop(0,   'rgba(120,60,255,0.07)');
+    g.addColorStop(0.5, 'rgba(0,180,255,0.03)');
+    g.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = g;
     ctx.beginPath();
-    ctx.arc(mouse.x, mouse.y, 60, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Outer soft halo
-    const g2 = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 180);
-    g2.addColorStop(0,   `rgba(123,47,255,${0.04 + intensity * 0.04})`);
-    g2.addColorStop(0.6, `rgba(0,198,255,${0.015})`);
-    g2.addColorStop(1,   'rgba(0,100,255,0)');
-    ctx.fillStyle = g2;
-    ctx.beginPath();
-    ctx.arc(mouse.x, mouse.y, 180, 0, Math.PI * 2);
+    ctx.arc(mouse.x, mouse.y, 120, 0, Math.PI * 2);
     ctx.fill();
   }
 
-  /* ── CONSTELLATION WEB ── */
-  function drawWeb() {
-    const near = stars.filter(s => s.layer === 2);
-    for (let i = 0; i < near.length; i++) {
-      const a = near[i];
-      const ax = a.ox + a.mx;
-      const ay = a.oy + a.my - scrollY * a.speed;
-      for (let j = i + 1; j < near.length; j++) {
-        const b = near[j];
-        const bx = b.ox + b.mx;
-        const by = b.oy + b.my - scrollY * b.speed;
-        const dx = ax - bx, dy = ay - by;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
-          const alpha = (1 - dist / 120) * 0.18;
-          ctx.beginPath();
-          ctx.moveTo(ax, ay);
-          ctx.lineTo(bx, by);
-          ctx.strokeStyle = `rgba(0,198,255,${alpha})`;
-          ctx.lineWidth = 0.4;
-          ctx.stroke();
-        }
-      }
-    }
+  /* ── WORMHOLE POSITION reacts to scroll ── */
+  function getWormholePos() {
+    // Moves upward slightly as user scrolls
+    const scrollEffect = scrollY * 0.12;
+    return {
+      x: cx,
+      y: cy - scrollEffect,
+    };
   }
 
-  /* ── MAIN RENDER LOOP ── */
+  /* ── MAIN LOOP ── */
   function draw() {
     time++;
-    scrollY += (targetScrollY - scrollY) * 0.06;
-    ctx.clearRect(0, 0, W, H);
+    scrollY += (targetScrollY - scrollY) * 0.05;
 
-    // Deep space gradient bg
-    const bgG = ctx.createLinearGradient(0, 0, W, H);
-    bgG.addColorStop(0, '#030610');
+    // Background
+    ctx.clearRect(0, 0, W, H);
+    const bgG = ctx.createLinearGradient(0, 0, 0, H);
+    bgG.addColorStop(0, '#04020e');
     bgG.addColorStop(0.5, '#060b18');
-    bgG.addColorStop(1, '#040a16');
+    bgG.addColorStop(1, '#030610');
     ctx.fillStyle = bgG;
     ctx.fillRect(0, 0, W, H);
 
-    // Nebulas (behind everything)
-    drawNebulas();
+    const { x, y } = getWormholePos();
 
-    // Cursor aurora
-    drawAurora();
+    drawNebula(x, y);
+    drawStars();
+    drawCursorAura();
 
-    // Update + draw stars
-    stars.forEach(s => {
-      const sy = s.oy - scrollY * s.speed;
-      const dx = mouse.x - (s.ox + s.mx);
-      const dy = mouse.y - sy;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const PULL = 100 + s.layer * 40;
+    // Shadow pass: rings behind core
+    ctx.save();
+    ctx.globalCompositeOperation = 'screen';
+    drawRings(x, y);
+    ctx.restore();
 
-      if (dist < PULL && dist > 0) {
-        const f = (1 - dist / PULL) * (0.3 + s.layer * 0.3);
-        s.mx += dx * f * 0.07;
-        s.my += dy * f * 0.07;
-      }
-      s.mx *= 0.92;
-      s.my *= 0.92;
+    // Particles (orbit)
+    drawParticles(x, y);
 
-      // Twinkle
-      const tw = 0.6 + Math.sin(time * s.twinkleSpeed + s.twinkleOffset) * 0.4;
-      const alpha = s.alpha * tw;
+    // Core on top
+    drawCore(x, y);
 
-      // Glow for bright stars
-      if (s.layer === 2) {
-        ctx.beginPath();
-        ctx.arc(s.ox + s.mx, sy + s.my, s.r * 3, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${s.color},${alpha * 0.12})`;
-        ctx.fill();
-      }
-
-      ctx.beginPath();
-      ctx.arc(s.ox + s.mx, sy + s.my, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${s.color},${alpha})`;
-      ctx.fill();
-    });
-
-    // Constellation web
-    drawWeb();
-
-    // Warp streaks
-    WARPS.forEach(w => { updateWarp(w); drawWarp(w); });
+    // Subtle lens flare — top of wormhole
+    const flareG = ctx.createRadialGradient(x, y - 20, 0, x, y - 20, 80);
+    flareG.addColorStop(0,   `rgba(255,220,255,${0.10 + Math.sin(time * 0.03) * 0.04})`);
+    flareG.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = flareG;
+    ctx.beginPath();
+    ctx.arc(x, y - 20, 80, 0, Math.PI * 2);
+    ctx.fill();
 
     requestAnimationFrame(draw);
   }
@@ -809,7 +761,7 @@ input:focus{
 })();
 
 /* ══════════════════════════════════
-   ATELIER CARD — MOUSE GLOW TRACKING
+   ATELIER CARD — MOUSE GLOW
 ══════════════════════════════════ */
 document.addEventListener('mousemove', e => {
   document.querySelectorAll('.atelier').forEach(el => {
@@ -905,7 +857,7 @@ document.querySelectorAll('.section-title').forEach(t => titleObs.observe(t));
    SCROLL REVEAL SYSTEM
 ══════════════════════════════════ */
 const revealObs = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => {
+  entries.forEach(e => {
     if (e.isIntersecting) {
       const delay = e.target.dataset.delay || 0;
       setTimeout(() => e.target.classList.add('in-view'), +delay);
@@ -918,13 +870,10 @@ function initReveal() {
   document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 }
 
-// Hero stats reveal with stagger
 document.querySelectorAll('.stat-item').forEach((el, i) => {
   el.classList.add('reveal', 'reveal-scale');
   el.dataset.delay = i * 100;
 });
-
-// Atelier cards stagger reveal
 document.querySelectorAll('.atelier').forEach((el, i) => {
   el.dataset.delay = (i % 5) * 80;
 });
