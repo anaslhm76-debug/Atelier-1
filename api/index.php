@@ -47,15 +47,16 @@ body{
   width:100%;
   height:100%;
   background:linear-gradient(145deg, #060b14 0%, #0a0c1a 100%);
+  backdrop-filter:blur(8px);
   z-index:10000;
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  transition:opacity 1.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 1.8s ease;
+  transition:opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 0.8s ease;
   visibility:visible;
   opacity:1;
-  backdrop-filter:blur(4px);
+  cursor:pointer;
 }
 #welcomeOverlay.hide{
   opacity:0;
@@ -73,7 +74,7 @@ body{
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
-  animation: welcomeGlow 2s ease infinite, floatText 1.2s ease-out forwards;
+  animation: welcomeGlow 2s ease infinite, floatText 0.9s 0.2s ease forwards;
   transform:scale(0.92);
   opacity:0;
   animation: welcomeGlow 2s ease infinite, floatText 0.9s 0.2s ease forwards;
@@ -101,13 +102,40 @@ body{
 @keyframes subFade{
   to{opacity:1; transform:translateY(0);}
 }
+.swipe-hint{
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  opacity:0;
+  animation: hintFade 1.5s 1.5s forwards;
+}
+@keyframes hintFade{
+  to{opacity:0.7;}
+}
+.swipe-hint span{
+  font-size:12px;
+  color:rgba(255,255,255,0.5);
+  letter-spacing:1px;
+}
+.swipe-arrow{
+  width:30px;
+  height:30px;
+  border-bottom:2px solid var(--accent);
+  border-right:2px solid var(--accent);
+  transform:rotate(45deg);
+  animation: bounce 1.5s infinite;
+}
+@keyframes bounce{
+  0%,100%{transform:rotate(45deg) translateY(0);}
+  50%{transform:rotate(45deg) translateY(8px);}
+}
 
 #mainContent{
-  opacity:0;
-  transition:opacity 1.2s cubic-bezier(0.2, 0.9, 0.3, 1);
-  pointer-events:none;
-}
-#mainContent.visible{
   opacity:1;
   pointer-events:auto;
 }
@@ -486,6 +514,10 @@ input::placeholder{color:rgba(255,255,255,0.25);}
 <div id="welcomeOverlay">
   <div class="welcome-text">WELCOME TO MY PORTFOLIO</div>
   <div class="welcome-sub">Anass Lahmar · Full Stack Developer</div>
+  <div class="swipe-hint">
+    <span>hover to enter</span>
+    <div class="swipe-arrow"></div>
+  </div>
 </div>
 
 <div id="mainContent">
@@ -569,28 +601,23 @@ input::placeholder{color:rgba(255,255,255,0.25);}
 <script>
 let welcomeRevealed = false;
 const welcomeOverlay = document.getElementById('welcomeOverlay');
-const mainContent = document.getElementById('mainContent');
 
-function revealMainContent() {
-  if(welcomeRevealed) return;
-  welcomeRevealed = true;
-  welcomeOverlay.classList.add('hide');
-  mainContent.classList.add('visible');
-  setTimeout(() => {
-    if(welcomeOverlay.parentNode) welcomeOverlay.style.display = 'none';
-  }, 1900);
+function hideWelcome() {
+  if(!welcomeRevealed) {
+    welcomeRevealed = true;
+    welcomeOverlay.classList.add('hide');
+  }
 }
 
-window.addEventListener('scroll', function onFirstScroll() {
+welcomeOverlay.addEventListener('mouseenter', function onHover() {
   if(!welcomeRevealed) {
-    revealMainContent();
-    window.removeEventListener('scroll', onFirstScroll);
+    hideWelcome();
   }
-}, { passive: true, once: true });
+});
 
 setTimeout(() => {
-  if(!welcomeRevealed) revealMainContent();
-}, 3200);
+  if(!welcomeRevealed) hideWelcome();
+}, 6000);
 
 (function() {
   const canvas = document.getElementById('bgCanvas');
