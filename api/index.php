@@ -47,25 +47,24 @@ body{
   width:100%;
   height:100%;
   background:linear-gradient(145deg, #060b14 0%, #0a0c1a 100%);
-  backdrop-filter:blur(8px);
+  backdrop-filter:blur(6px);
   z-index:10000;
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  transition:opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 0.8s ease;
+  transition:opacity 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 0.9s ease;
   visibility:visible;
   opacity:1;
-  cursor:pointer;
+  pointer-events:none;
 }
 #welcomeOverlay.hide{
   opacity:0;
   visibility:hidden;
-  pointer-events:none;
 }
-.welcome-text{
+.welcome-line-top{
   font-family:'Syne',sans-serif;
-  font-size:clamp(28px,7vw,68px);
+  font-size:clamp(32px,8vw,80px);
   font-weight:800;
   letter-spacing:-0.02em;
   text-align:center;
@@ -74,65 +73,44 @@ body{
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
-  animation: welcomeGlow 2s ease infinite, floatText 0.9s 0.2s ease forwards;
-  transform:scale(0.92);
+  animation: welcomeGlow 2.5s ease infinite;
+  transform:translateY(0);
   opacity:0;
-  animation: welcomeGlow 2s ease infinite, floatText 0.9s 0.2s ease forwards;
+  animation: welcomeGlow 2.5s ease infinite, floatDown 0.8s 0.3s forwards;
 }
-@keyframes floatText{
-  0%{opacity:0; transform:scale(0.92) translateY(20px);}
-  100%{opacity:1; transform:scale(1) translateY(0);}
+@keyframes floatDown{
+  0%{opacity:0; transform:translateY(-30px);}
+  100%{opacity:1; transform:translateY(0);}
+}
+.welcome-line-bottom{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(28px,7vw,70px);
+  font-weight:800;
+  letter-spacing:-0.02em;
+  text-align:center;
+  background:linear-gradient(135deg, var(--accent2), var(--accent3), #ffffff, var(--accent));
+  background-size:300% auto;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation: welcomeGlowBottom 2.5s ease infinite;
+  margin-top:10px;
+  opacity:0;
+  animation: welcomeGlowBottom 2.5s ease infinite, floatUp 0.8s 0.5s forwards;
+}
+@keyframes floatUp{
+  0%{opacity:0; transform:translateY(30px);}
+  100%{opacity:1; transform:translateY(0);}
 }
 @keyframes welcomeGlow{
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
   100%{background-position:0% 50%;}
 }
-.welcome-sub{
-  margin-top:20px;
-  font-size:14px;
-  color:rgba(255,255,255,0.5);
-  letter-spacing:2px;
-  text-transform:uppercase;
-  font-weight:300;
-  opacity:0;
-  transform:translateY(12px);
-  animation: subFade 1s 0.8s forwards;
-}
-@keyframes subFade{
-  to{opacity:1; transform:translateY(0);}
-}
-.swipe-hint{
-  position:absolute;
-  bottom:40px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:8px;
-  opacity:0;
-  animation: hintFade 1.5s 1.5s forwards;
-}
-@keyframes hintFade{
-  to{opacity:0.7;}
-}
-.swipe-hint span{
-  font-size:12px;
-  color:rgba(255,255,255,0.5);
-  letter-spacing:1px;
-}
-.swipe-arrow{
-  width:30px;
-  height:30px;
-  border-bottom:2px solid var(--accent);
-  border-right:2px solid var(--accent);
-  transform:rotate(45deg);
-  animation: bounce 1.5s infinite;
-}
-@keyframes bounce{
-  0%,100%{transform:rotate(45deg) translateY(0);}
-  50%{transform:rotate(45deg) translateY(8px);}
+@keyframes welcomeGlowBottom{
+  0%{background-position:100% 50%;}
+  50%{background-position:0% 50%;}
+  100%{background-position:100% 50%;}
 }
 
 #mainContent{
@@ -512,12 +490,8 @@ input::placeholder{color:rgba(255,255,255,0.25);}
 <body>
 
 <div id="welcomeOverlay">
-  <div class="welcome-text">WELCOME TO MY PORTFOLIO</div>
-  <div class="welcome-sub">Anass Lahmar · Full Stack Developer</div>
-  <div class="swipe-hint">
-    <span>hover to enter</span>
-    <div class="swipe-arrow"></div>
-  </div>
+  <div class="welcome-line-top">WELCOME TO</div>
+  <div class="welcome-line-bottom">MY PORTFOLIO</div>
 </div>
 
 <div id="mainContent">
@@ -609,11 +583,12 @@ function hideWelcome() {
   }
 }
 
-welcomeOverlay.addEventListener('mouseenter', function onHover() {
+window.addEventListener('scroll', function onFirstScroll() {
   if(!welcomeRevealed) {
     hideWelcome();
+    window.removeEventListener('scroll', onFirstScroll);
   }
-});
+}, { passive: true, once: true });
 
 setTimeout(() => {
   if(!welcomeRevealed) hideWelcome();
