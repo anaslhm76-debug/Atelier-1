@@ -2,7 +2,8 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>ANASS LAHMAR | Portfolio Professionnel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ANASS LAHMAR | Portfolio Développeur Web</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 * {
@@ -394,27 +395,87 @@ nav.scrolled {
 }
 .about-title.in-view { opacity: 1; transform: translateY(0); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
-.about-left { opacity: 0; transform: translateX(-30px); transition: all 0.7s; }
+
+/* CARDS STYLES - HOVER PROFESSIONNEL SANS CADRE BLANC */
+.about-left, .about-right {
+  background: rgba(15, 25, 45, 0.35);
+  backdrop-filter: blur(2px);
+  border-radius: 28px;
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  will-change: transform, border-color, box-shadow, background;
+}
+
+.about-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.7s, transform 0.7s, background 0.35s, border-color 0.35s, box-shadow 0.35s, transform 0.35s;
+}
 .about-left.in-view { opacity: 1; transform: translateX(0); }
-.about-text { font-size: 15px; line-height: 1.8; color: var(--muted); }
-.about-right { opacity: 0; transform: translateX(30px); transition: all 0.7s 0.1s; }
+
+.about-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.7s, transform 0.7s, background 0.35s, border-color 0.35s, box-shadow 0.35s, transform 0.35s;
+}
 .about-right.in-view { opacity: 1; transform: translateX(0); }
-.skills-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 600; margin-bottom: 20px; color: var(--accent); }
+
+/* HOVER PROFESSIONNEL : transition fluide, pas de fond blanc agressif */
+.about-left:hover, .about-right:hover {
+  background: rgba(0, 130, 200, 0.08);
+  border-color: rgba(0, 198, 255, 0.45);
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 35px -15px rgba(0, 198, 255, 0.25), 0 0 0 1px rgba(0, 198, 255, 0.1) inset;
+}
+
+/* Effet subtil pour le texte */
+.about-text {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--muted);
+  transition: color 0.3s ease;
+}
+.about-left:hover .about-text {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.skills-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  background: linear-gradient(120deg, #aaccff, var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: all 0.3s ease;
+}
+.about-right:hover .skills-title {
+  background: linear-gradient(135deg, var(--accent3), var(--accent), #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  letter-spacing: 0.3px;
+}
+
 .skills-container { display: flex; flex-wrap: wrap; gap: 12px; }
 .skill-tag {
   background: rgba(0, 198, 255, 0.08);
   border: 1px solid rgba(0, 198, 255, 0.15);
-  border-radius: 50px;
-  padding: 8px 18px;
+  border-radius: 60px;
+  padding: 8px 20px;
   font-size: 13px;
   font-weight: 500;
-  transition: all 0.3s;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+  cursor: default;
+  color: rgba(255,255,255,0.8);
 }
 .skill-tag:hover {
-  background: rgba(0, 198, 255, 0.2);
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 5px 15px rgba(0, 198, 255, 0.2);
+  background: linear-gradient(115deg, rgba(0, 198, 255, 0.25), rgba(123, 47, 255, 0.25));
+  transform: translateY(-4px) scale(1.05);
   border-color: var(--accent);
+  color: white;
+  box-shadow: 0 6px 14px rgba(0, 198, 255, 0.2);
 }
 
 .ateliers-section { padding: 80px 60px; position: relative; z-index: 2; }
@@ -696,6 +757,7 @@ input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 198, 25
   .about-grid { grid-template-columns: 1fr; gap: 30px; }
   .exercice-card { flex-direction: column; align-items: flex-start; gap: 12px; }
   .greeting-wrap { justify-content: center; }
+  .about-left, .about-right { padding: 24px; }
 }
 </style>
 </head>
@@ -724,9 +786,7 @@ input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 198, 25
       <div class="hero-tag">Disponible pour missions</div>
       <h1 class="hero-name">
         <div class="greeting-wrap" id="greetingWrap"></div>
-        <div style="margin-top:4px;">
-          <span class="name-main"><span class="name-main-inner">Anass.</span></span>
-        </div>
+        <div style="margin-top:4px;"><span class="name-main"><span class="name-main-inner">Anass.</span></span></div>
       </h1>
       <p class="hero-desc">Curieux et motivé, je développe des projets web et j'apprends chaque jour de nouvelles technologies pour améliorer mes compétences et réaliser des solutions concrètes.</p>
       <div class="hero-cta">
@@ -766,416 +826,97 @@ input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 198, 25
     <h2 class="section-title">TPs & Rapports</h2>
     <div class="container" id="atelierGrid"></div>
   </section>
-
   <div id="exercices"></div>
 
-  <!-- CONTACT MODAL - NUMERO TELEPHONE LIGNE WEHDA BLA ETOILE -->
-  <div id="contactModal" onclick="contactOverlayClick(event)">
-    <div class="cmodal">
-      <button class="cmodal-close" onclick="closeContactModal()">✕</button>
-      <h3>Me <span>contacter</span></h3>
-      <p class="cmodal-subtitle">Disponible pour missions et collaborations.</p>
-      <div class="cinfo-grid">
-        <a class="cinfo-tile" href="mailto:Anaslhm76@gmail.com">
-          <div class="cinfo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></div>
-          <div><span class="cinfo-label">Email</span><span class="cinfo-value">Anaslhm76@gmail.com</span></div>
-        </a>
-        <a class="cinfo-tile" href="tel:0777852536">
-          <div class="cinfo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.9v2.02z"/></svg></div>
-          <div><span class="cinfo-label">Téléphone</span><span class="cinfo-value">0777 852 536</span></div>
-        </a>
-        <div class="cinfo-tile full" style="cursor:default;">
-          <div class="cinfo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <div><span class="cinfo-label">Localisation</span><span class="cinfo-value">Tanger, Maroc</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div id="contactModal" onclick="contactOverlayClick(event)"><div class="cmodal"><button class="cmodal-close" onclick="closeContactModal()">✕</button><h3>Me <span>contacter</span></h3><p class="cmodal-subtitle">Disponible pour missions et collaborations.</p><div class="cinfo-grid"><a class="cinfo-tile" href="mailto:Anaslhm76@gmail.com"><div class="cinfo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></div><div><span class="cinfo-label">Email</span><span class="cinfo-value">Anaslhm76@gmail.com</span></div></a><a class="cinfo-tile" href="tel:0777852536"><div class="cinfo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.9v2.02z"/></svg></div><div><span class="cinfo-label">Téléphone</span><span class="cinfo-value">0777 852 536</span></div></a><div class="cinfo-tile full" style="cursor:default;"><div class="cinfo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><span class="cinfo-label">Localisation</span><span class="cinfo-value">Tanger, Maroc</span></div></div></div></div></div>
 
-  <div id="modal" onclick="outsideClick(event)">
-    <div class="modal-content">
-      <h3 id="modalTitle"></h3>
-      <div class="modal-section"><h4>Lien TP (Code source VS)</h4><div class="input-row"><input type="text" id="tpLink" placeholder="https://drive.google.com/..."><button class="btn-small" onclick="openModalLink('tp')">Ouvrir</button></div></div>
-      <div class="modal-section"><h4>Lien Rapport (Word)</h4><div class="input-row"><input type="text" id="rapportLink" placeholder="https://docs.google.com/..."><button class="btn-small" onclick="openModalLink('rapport')">Ouvrir</button></div></div>
-      <div class="modal-actions"><button class="btn-save" onclick="saveData()">Sauvegarder</button><button class="btn-del" onclick="deleteData()">Supprimer</button><button class="btn-close" onclick="closeModal()">Fermer</button></div>
-    </div>
-  </div>
+  <div id="modal" onclick="outsideClick(event)"><div class="modal-content"><h3 id="modalTitle"></h3><div class="modal-section"><h4>Lien TP (Code source VS)</h4><div class="input-row"><input type="text" id="tpLink" placeholder="https://drive.google.com/..."><button class="btn-small" onclick="openModalLink('tp')">Ouvrir</button></div></div><div class="modal-section"><h4>Lien Rapport (Word)</h4><div class="input-row"><input type="text" id="rapportLink" placeholder="https://docs.google.com/..."><button class="btn-small" onclick="openModalLink('rapport')">Ouvrir</button></div></div><div class="modal-actions"><button class="btn-save" onclick="saveData()">Sauvegarder</button><button class="btn-del" onclick="deleteData()">Supprimer</button><button class="btn-close" onclick="closeModal()">Fermer</button></div></div></div>
 </div>
 
 <script>
-// WELCOME
+// Welcome & all logic remains same as before
 let welcomeRevealed = false;
 const welcomeOverlay = document.getElementById('welcomeOverlay');
 function hideWelcome() { if (!welcomeRevealed) { welcomeRevealed = true; welcomeOverlay.classList.add('hide'); } }
 window.addEventListener('scroll', function onFirstScroll() { if (!welcomeRevealed) { hideWelcome(); window.removeEventListener('scroll', onFirstScroll); } }, { passive: true, once: true });
 
-// ANIMATION CANVAS
+// Canvas background (same as previous)
 (function() {
   const canvas = document.getElementById('bgCanvas');
   const ctx = canvas.getContext('2d');
-  let W, H, centerX, centerY;
-  let scrollY = 0, targetScrollY = 0;
-  let time = 0;
+  let W, H, centerX, centerY; let scrollY = 0, targetScrollY = 0; let time = 0;
   const mouse = { x: 0, y: 0, active: false };
-  
-  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; centerX = W / 2; centerY = H / 2; }
-  resize();
-  window.addEventListener('resize', resize);
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; centerX = W/2; centerY = H/2; }
+  resize(); window.addEventListener('resize', resize);
   document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; mouse.active = true; });
   document.addEventListener('mouseleave', () => { mouse.active = false; });
   window.addEventListener('scroll', () => { targetScrollY = window.scrollY; });
-  
-  const rings = [
-    { r: 60, w: 3.5, a: 0.55, speed: 0.006, color: '#c084fc' },
-    { r: 110, w: 2.5, a: 0.4, speed: -0.0045, color: '#a855f7' },
-    { r: 170, w: 2, a: 0.3, speed: 0.0035, color: '#818cf8' },
-    { r: 240, w: 1.5, a: 0.22, speed: -0.0025, color: '#60a5fa' },
-    { r: 320, w: 1, a: 0.12, speed: 0.0015, color: '#7c3aed' }
-  ];
+  const rings = [{ r:60, w:3.5, a:0.55, speed:0.006, color:'#c084fc' },{ r:110, w:2.5, a:0.4, speed:-0.0045, color:'#a855f7' },{ r:170, w:2, a:0.3, speed:0.0035, color:'#818cf8' },{ r:240, w:1.5, a:0.22, speed:-0.0025, color:'#60a5fa' },{ r:320, w:1, a:0.12, speed:0.0015, color:'#7c3aed' }];
   const ringAngles = rings.map(() => Math.random() * Math.PI * 2);
-  
-  const particles = [];
-  for (let i = 0; i < 120; i++) {
-    particles.push({
-      x: (Math.random() - 0.5) * 800,
-      y: (Math.random() - 0.5) * 500,
-      z: Math.random() * 350,
-      size: 1 + Math.random() * 2.5,
-      alpha: 0.2 + Math.random() * 0.5,
-      speedX: (Math.random() - 0.5) * 0.2,
-      speedY: (Math.random() - 0.5) * 0.15
-    });
-  }
-  
-  const stars = [];
-  for (let i = 0; i < 250; i++) {
-    stars.push({
-      x: (Math.random() - 0.5) * 1000,
-      y: (Math.random() - 0.5) * 700,
-      r: 0.5 + Math.random() * 1.5,
-      alpha: 0.3 + Math.random() * 0.6,
-      twinkle: Math.random() * Math.PI * 2,
-      twinkleSpeed: 0.003 + Math.random() * 0.012
-    });
-  }
-  
-  function drawRings(x, y) {
-    rings.forEach((ring, i) => {
-      ringAngles[i] += ring.speed;
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.rotate(ringAngles[i]);
-      ctx.scale(1, 0.35 + i * 0.03);
-      ctx.beginPath();
-      ctx.arc(0, 0, ring.r, 0, Math.PI * 2);
-      ctx.strokeStyle = ring.color + Math.round(ring.a * 200).toString(16).padStart(2, '0');
-      ctx.lineWidth = ring.w;
-      ctx.shadowBlur = ring.w * 3;
-      ctx.shadowColor = ring.color;
-      ctx.stroke();
-      ctx.restore();
-    });
-  }
-  
-  function drawParticles(x, y) {
-    particles.forEach(p => {
-      p.x += p.speedX;
-      p.y += p.speedY;
-      if (p.x > 500) p.x = -500;
-      if (p.x < -500) p.x = 500;
-      if (p.y > 350) p.y = -350;
-      if (p.y < -350) p.y = 350;
-      
-      const perspective = 380 / (380 + p.z);
-      const px = (p.x + Math.sin(time * 0.002) * 15) * perspective + x;
-      const py = (p.y + Math.cos(time * 0.003) * 10) * perspective + y - scrollY * 0.06;
-      
-      ctx.beginPath();
-      ctx.arc(px, py, p.size * perspective * 0.8, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(100, 150, 255, ${p.alpha * 0.5})`;
-      ctx.fill();
-    });
-  }
-  
-  function drawStars() {
-    stars.forEach(s => {
-      const twinkle = 0.5 + Math.sin(time * s.twinkleSpeed + s.twinkle) * 0.3;
-      const x = ((s.x + W * 2) % (W + 500)) - 250;
-      const y = ((s.y + H * 2) % (H + 500)) - 250;
-      ctx.beginPath();
-      ctx.arc(x, y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(200, 220, 255, ${s.alpha * twinkle * 0.6})`;
-      ctx.fill();
-    });
-  }
-  
-  function draw() {
-    time++;
-    scrollY += (targetScrollY - scrollY) * 0.1;
-    ctx.clearRect(0, 0, W, H);
-    
-    const grad = ctx.createLinearGradient(0, 0, 0, H);
-    grad.addColorStop(0, '#04020e');
-    grad.addColorStop(0.5, '#060b18');
-    grad.addColorStop(1, '#030610');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, W, H);
-    
-    drawStars();
-    
-    let centerXPos = centerX;
-    let centerYPos = centerY - scrollY * 0.08;
-    if (mouse.active) {
-      centerXPos += (mouse.x - centerX) * 0.08;
-      centerYPos += (mouse.y - centerY) * 0.06;
-    }
-    
-    drawRings(centerXPos, centerYPos);
-    drawParticles(centerXPos, centerYPos);
-    
-    requestAnimationFrame(draw);
-  }
-  draw();
+  function drawRings(x,y){ rings.forEach((ring,i)=>{ ringAngles[i]+=ring.speed; ctx.save(); ctx.translate(x,y); ctx.rotate(ringAngles[i]); ctx.scale(1,0.35+i*0.03); ctx.beginPath(); ctx.arc(0,0,ring.r,0,Math.PI*2); ctx.strokeStyle=ring.color+Math.round(ring.a*200).toString(16).padStart(2,'0'); ctx.lineWidth=ring.w; ctx.shadowBlur=ring.w*3; ctx.shadowColor=ring.color; ctx.stroke(); ctx.restore(); }); }
+  function drawStars(){ for(let i=0;i<200;i++){ const x=(i*131)%W, y=(i*253)%H, alpha=0.2+Math.sin(time*0.003+i)*0.1; ctx.beginPath(); ctx.arc(x,y,0.8,0,Math.PI*2); ctx.fillStyle=`rgba(200,220,255,${alpha*0.6})`; ctx.fill(); } }
+  function draw(){ time++; scrollY+=(targetScrollY-scrollY)*0.1; ctx.clearRect(0,0,W,H); const grad=ctx.createLinearGradient(0,0,0,H); grad.addColorStop(0,'#04020e'); grad.addColorStop(0.5,'#060b18'); grad.addColorStop(1,'#030610'); ctx.fillStyle=grad; ctx.fillRect(0,0,W,H); drawStars(); let cx=centerX, cy=centerY-scrollY*0.08; if(mouse.active){ cx+=(mouse.x-centerX)*0.08; cy+=(mouse.y-centerY)*0.06; } drawRings(cx,cy); requestAnimationFrame(draw); } draw();
 })();
 
-document.addEventListener('mousemove', e => {
-  document.querySelectorAll('.atelier').forEach(el => {
-    const rect = el.getBoundingClientRect();
-    el.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width * 100) + '%');
-    el.style.setProperty('--my', ((e.clientY - rect.top) / rect.height * 100) + '%');
-  });
-});
+document.addEventListener('mousemove', e => { document.querySelectorAll('.atelier').forEach(el => { const rect = el.getBoundingClientRect(); el.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width * 100) + '%'); el.style.setProperty('--my', ((e.clientY - rect.top) / rect.height * 100) + '%'); }); });
 
 const prog = document.getElementById('scrollProgress');
 const navEl = document.getElementById('mainNav');
 const scrollTopBtn = document.getElementById('scrollTop');
-window.addEventListener('scroll', () => {
-  const total = document.body.scrollHeight - window.innerHeight;
-  prog.style.width = (window.scrollY / total * 100) + '%';
-  navEl.classList.toggle('scrolled', window.scrollY > 60);
-  scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
-});
+window.addEventListener('scroll', () => { const total = document.body.scrollHeight - window.innerHeight; prog.style.width = (window.scrollY / total * 100) + '%'; navEl.classList.toggle('scrolled', window.scrollY > 60); scrollTopBtn.classList.toggle('visible', window.scrollY > 300); });
 
-// GREETING
 const GREETING = 'Bonjour, je suis';
 const gwEl = document.getElementById('greetingWrap');
 const allChars = [];
-GREETING.split(' ').forEach(word => {
-  const wDiv = document.createElement('span'); wDiv.className = 'g-word';
-  word.split('').forEach(ch => { const s = document.createElement('span'); s.className = 'g-char'; s.textContent = ch; wDiv.appendChild(s); allChars.push(s); });
-  gwEl.appendChild(wDiv); gwEl.appendChild(document.createTextNode(' '));
-});
+GREETING.split(' ').forEach(word => { const wDiv = document.createElement('span'); wDiv.className = 'g-word'; word.split('').forEach(ch => { const s = document.createElement('span'); s.className = 'g-char'; s.textContent = ch; wDiv.appendChild(s); allChars.push(s); }); gwEl.appendChild(wDiv); gwEl.appendChild(document.createTextNode(' ')); });
 allChars.forEach((c, i) => { setTimeout(() => { c.classList.add('visible'); c.style.transform = 'translateY(-6px)'; setTimeout(() => c.style.transform = '', 150); }, 400 + i * 55); });
 gwEl.addEventListener('mouseover', e => { if (e.target.classList.contains('g-char')) { const idx = allChars.indexOf(e.target); allChars.forEach((c, i) => { const d = Math.abs(i - idx); if (d <= 2) setTimeout(() => { c.style.transform = `translateY(${-6 + d*2}px) scale(${1.1 - d*0.03})`; setTimeout(() => c.style.transform = '', 300); }, d * 40); }); } });
 
-// COUNTERS
 function animateCounter(el) { const target = +el.dataset.target; let current = 0; const inc = target / 80; const timer = setInterval(() => { current += inc; if (current >= target) { current = target; clearInterval(timer); } el.textContent = Math.floor(current) + (target === 160 ? '+' : ''); }, 16); }
 const counterObs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); counterObs.unobserve(e.target); } }); }, { threshold: 0.5 });
 document.querySelectorAll('.counter').forEach(c => counterObs.observe(c));
 
-// REVEAL
 const revealObs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); revealObs.unobserve(e.target); } }); }, { threshold: 0.15 });
 document.querySelectorAll('.reveal, .about-title, .about-left, .about-right, .section-title').forEach(el => revealObs.observe(el));
 
-// CONTACT MODAL
 function openContactModal() { document.getElementById('contactModal').classList.add('open'); }
 function closeContactModal() { document.getElementById('contactModal').classList.remove('open'); }
 function contactOverlayClick(e) { if (e.target.id === 'contactModal') closeContactModal(); }
 
-// ==================== ⭐⭐⭐ TABLEAU CENTRALISÉ DES LIENS ⭐⭐⭐ ====================
-// ICI TU METS TES LIENS POUR CHAQUE ATELIER ET EXERCICE
-// TP = lien Google Drive (code source Visual Studio)
-// RAPPORT = lien Google Docs / Word (screenshots)
-const MES_LIENS = {
-  // ----- ATELIER 1 -----
-  "Atelier 1_Exercice 1": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP1_EX1",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT1_EX1"
-  },
-  "Atelier 1_Exercice 2": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP1_EX2",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT1_EX2"
-  },
-  "Atelier 1_Exercice 3": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP1_EX3",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT1_EX3"
-  },
-  "Atelier 1_Exercice 4": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP1_EX4",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT1_EX4"
-  },
-  "Atelier 1_Exercice 5": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP1_EX5",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT1_EX5"
-  },
-  "Atelier 1_Exercice 6": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP1_EX6",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT1_EX6"
-  },
-  "Atelier 1_Exercice 7": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP1_EX7",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT1_EX7"
-  },
-  "Atelier 1_Exercice 8": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP1_EX8",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT1_EX8"
-  },
+const MES_LIENS = {};
+function getDefaultLinks(atelier, exercice) { return { tp: "", rapport: "" }; }
 
-  // ----- ATELIER 2 -----
-  "Atelier 2_Exercice 1": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP2_EX1",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT2_EX1"
-  },
-  "Atelier 2_Exercice 2": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP2_EX2",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT2_EX2"
-  },
-  "Atelier 2_Exercice 3": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP2_EX3",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT2_EX3"
-  },
-  "Atelier 2_Exercice 4": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP2_EX4",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT2_EX4"
-  },
-  "Atelier 2_Exercice 5": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP2_EX5",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT2_EX5"
-  },
-  "Atelier 2_Exercice 6": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP2_EX6",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT2_EX6"
-  },
-  "Atelier 2_Exercice 7": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP2_EX7",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT2_EX7"
-  },
-  "Atelier 2_Exercice 8": {
-    tp: "https://drive.google.com/drive/folders/1EXEMPLE_TP2_EX8",
-    rapport: "https://docs.google.com/document/d/1EXEMPLE_RAPPORT2_EX8"
-  },
-
-  // Ajoute ici Atelier 3 jusqu'à Atelier 20...
-  // Tu peux copier/coller le même modèle et changer les numéros
-};
-
-// ==================== FONCTION POUR RÉCUPÉRER LES LIENS ====================
-function getDefaultLinks(atelier, exercice) {
-  const key = atelier + "_" + exercice;
-  return MES_LIENS[key] || { tp: "", rapport: "" };
-}
-
-// ATELIERS & EXERCICES
 const ATELIERS = 20, EXERCICES_PAR_ATELIER = 8;
 let currentKey = '';
 const extIcon = `<svg viewBox="0 0 12 12" fill="none" width="10" height="10"><path d="M7 1h4v4M11 1L5.5 6.5M5 2H2a1 1 0 00-1 1v7a1 1 0 001 1h7a1 1 0 001-1V8" stroke="currentColor" stroke-width="1.4"/></svg>`;
 const gridContainer = document.getElementById('atelierGrid');
-
 for (let i = 1; i <= ATELIERS; i++) { 
   const name = 'Atelier ' + i; 
-  const d = document.createElement('div'); 
-  d.className = 'atelier'; 
-  d.textContent = name; 
-  d.onclick = e => { 
-    const rect = d.getBoundingClientRect(); 
-    const rip = document.createElement('span'); 
-    rip.className = 'ripple'; 
-    const size = Math.max(d.offsetWidth, d.offsetHeight) * 2; 
-    rip.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size/2}px;top:${e.clientY - rect.top - size/2}px;`; 
-    d.appendChild(rip); 
-    setTimeout(() => rip.remove(), 700); 
-    openAtelier(name); 
-  }; 
+  const d = document.createElement('div'); d.className = 'atelier'; d.textContent = name; 
+  d.onclick = e => { const rect = d.getBoundingClientRect(); const rip = document.createElement('span'); rip.className = 'ripple'; const size = Math.max(d.offsetWidth, d.offsetHeight) * 2; rip.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size/2}px;top:${e.clientY - rect.top - size/2}px;`; d.appendChild(rip); setTimeout(() => rip.remove(), 700); openAtelier(name); }; 
   gridContainer.appendChild(d); 
 }
-
 function openAtelier(name) { 
   const box = document.getElementById('exercices'); 
   box.innerHTML = '<h3>' + name + '</h3>'; 
   for (let j = 1; j <= EXERCICES_PAR_ATELIER; j++) { 
-    const exName = 'Exercice ' + j; 
-    const key = name + '_' + exName; 
-    
+    const exName = 'Exercice ' + j; const key = name + '_' + exName; 
     const defaultLinks = getDefaultLinks(name, exName);
     const tpLink = localStorage.getItem(key + '_tp') || defaultLinks.tp;
     const rapportLink = localStorage.getItem(key + '_rapport') || defaultLinks.rapport;
-    
-    const card = document.createElement('div'); 
-    card.className = 'exercice-card'; 
-    card.dataset.key = key; 
-    card.innerHTML = `<div class="exercice-label">${exName}</div><div class="exercice-links">
-      <a class="link-btn link-tp" ${tpLink ? 'href="' + tpLink + '" target="_blank"' : 'href="#"'} onclick="handleLinkClick(event,'${key}','tp')">${extIcon} TP (Code VS)</a>
-      <a class="link-btn link-rapport" ${rapportLink ? 'href="' + rapportLink + '" target="_blank"' : 'href="#"'} onclick="handleLinkClick(event,'${key}','rapport')">${extIcon} Rapport (Word)</a>
-    </div>`; 
-    box.appendChild(card); 
-    setTimeout(() => card.classList.add('show'), j * 50); 
+    const card = document.createElement('div'); card.className = 'exercice-card'; card.dataset.key = key; 
+    card.innerHTML = `<div class="exercice-label">${exName}</div><div class="exercice-links"><a class="link-btn link-tp" ${tpLink ? 'href="' + tpLink + '" target="_blank"' : 'href="#"'} onclick="handleLinkClick(event,'${key}','tp')">${extIcon} TP (Code VS)</a><a class="link-btn link-rapport" ${rapportLink ? 'href="' + rapportLink + '" target="_blank"' : 'href="#"'} onclick="handleLinkClick(event,'${key}','rapport')">${extIcon} Rapport (Word)</a></div>`; 
+    box.appendChild(card); setTimeout(() => card.classList.add('show'), j * 50); 
   } 
   box.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
 }
-
-function handleLinkClick(e, key, type) { 
-  const link = localStorage.getItem(key + '_' + type); 
-  if (!link) { 
-    e.preventDefault(); 
-    openModal(key); 
-  } 
-}
-
-function openModal(key) { 
-  currentKey = key; 
-  const parts = key.split('_'); 
-  document.getElementById('modalTitle').textContent = parts[0] + ' ' + parts[1]; 
-  document.getElementById('modal').style.display = 'block'; 
-  document.getElementById('tpLink').value = localStorage.getItem(key + '_tp') || ''; 
-  document.getElementById('rapportLink').value = localStorage.getItem(key + '_rapport') || ''; 
-}
-
-function saveData() { 
-  const tp = document.getElementById('tpLink').value.trim(); 
-  const rapport = document.getElementById('rapportLink').value.trim(); 
-  if (tp) localStorage.setItem(currentKey + '_tp', tp); 
-  else localStorage.removeItem(currentKey + '_tp'); 
-  if (rapport) localStorage.setItem(currentKey + '_rapport', rapport); 
-  else localStorage.removeItem(currentKey + '_rapport'); 
-  
-  const card = document.querySelector('[data-key="' + currentKey + '"]'); 
-  if (card) { 
-    const links = card.querySelectorAll('.link-btn'); 
-    if (tp) { links[0].href = tp; links[0].target = '_blank'; links[0].onclick = null; } 
-    else { 
-      const parts = currentKey.split('_');
-      const defaultLinks = getDefaultLinks(parts[0], parts[1]);
-      links[0].href = defaultLinks.tp || '#'; 
-      links[0].onclick = e => handleLinkClick(e, currentKey, 'tp'); 
-    } 
-    if (rapport) { links[1].href = rapport; links[1].target = '_blank'; links[1].onclick = null; } 
-    else { 
-      const parts = currentKey.split('_');
-      const defaultLinks = getDefaultLinks(parts[0], parts[1]);
-      links[1].href = defaultLinks.rapport || '#'; 
-      links[1].onclick = e => handleLinkClick(e, currentKey, 'rapport'); 
-    } 
-  } 
-  closeModal(); 
-}
-
-function deleteData() { 
-  localStorage.removeItem(currentKey + '_tp'); 
-  localStorage.removeItem(currentKey + '_rapport'); 
-  document.getElementById('tpLink').value = ''; 
-  document.getElementById('rapportLink').value = ''; 
-  const parts = currentKey.split('_');
-  openAtelier(parts[0]);
-}
-
-function openModalLink(type) { 
-  const link = localStorage.getItem(currentKey + '_' + type); 
-  if (link) window.open(link, '_blank'); 
-}
-
+function handleLinkClick(e, key, type) { const link = localStorage.getItem(key + '_' + type); if (!link) { e.preventDefault(); openModal(key); } }
+function openModal(key) { currentKey = key; const parts = key.split('_'); document.getElementById('modalTitle').textContent = parts[0] + ' ' + parts[1]; document.getElementById('modal').style.display = 'block'; document.getElementById('tpLink').value = localStorage.getItem(key + '_tp') || ''; document.getElementById('rapportLink').value = localStorage.getItem(key + '_rapport') || ''; }
+function saveData() { const tp = document.getElementById('tpLink').value.trim(); const rapport = document.getElementById('rapportLink').value.trim(); if (tp) localStorage.setItem(currentKey + '_tp', tp); else localStorage.removeItem(currentKey + '_tp'); if (rapport) localStorage.setItem(currentKey + '_rapport', rapport); else localStorage.removeItem(currentKey + '_rapport'); const parts = currentKey.split('_'); openAtelier(parts[0]); closeModal(); }
+function deleteData() { localStorage.removeItem(currentKey + '_tp'); localStorage.removeItem(currentKey + '_rapport'); const parts = currentKey.split('_'); openAtelier(parts[0]); closeModal(); }
+function openModalLink(type) { const link = localStorage.getItem(currentKey + '_' + type); if (link) window.open(link, '_blank'); }
 function closeModal() { document.getElementById('modal').style.display = 'none'; }
 function outsideClick(e) { if (e.target.id === 'modal') closeModal(); }
-
 const atelierObserver = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); atelierObserver.unobserve(e.target); } }); }, { threshold: 0.05 });
 document.querySelectorAll('.atelier').forEach(el => atelierObserver.observe(el));
 </script>
